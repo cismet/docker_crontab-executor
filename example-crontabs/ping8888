@@ -1,0 +1,1 @@
+* * * * * echo "$(ping -c1 8.8.8.8 | head -2 | tail -1)" >> /dev/stdout 2>&1

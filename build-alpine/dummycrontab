@@ -1,0 +1,2 @@
+@reboot echo "$(date) | crontab-executor started successfully" >> /dev/stdout 2>&1
+# crontab requires an empty line at the end of the file

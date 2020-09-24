@@ -1,0 +1,1 @@
+* * * * * echo "$(date) | example crontab echoing minutely" >> /dev/stdout 2>&1

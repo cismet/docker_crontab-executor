@@ -1,0 +1,2 @@
+*/2 * * * * echo "crontab 2, line 1" >> /dev/stdout 2>&1
+*/3 * * * * echo "crontab 2, line 2" >> /dev/stdout 2>&1

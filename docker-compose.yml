@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  crontab-executor-alpine:  
+    container_name: crontab-executor
+    image: cismet/crontab-executor:alpine
+    build: ./build-alpine
+    environment:
+      - TZ=Europe/Berlin
+    volumes:
+      - ./example-crontabs/echoDate:/etc/cron/001-crontab:ro
+      - ./example-crontabs/echo2lines:/etc/cron/002-crontab:ro
+      - ./example-crontabs/ping8888:/etc/cron/003-crontab:ro
+#    command: ["*"] #  executing everything that is mapped to /etc/cron/ (this is the default)
+#    command: ["001-crontab"] # executing a single crontab file
+#    command: ["001-crontab", "002-crontab", "003-crontab"] # executing a list of crontab files
+#    command: ["001-*", "*-crontab"] # wildcards are allowed, dupes are deduplicated before execution
