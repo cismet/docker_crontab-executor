@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# fixing env inside cron
+printenv | grep -v "no_proxy" >> /etc/environment
+
 PARAMS=$@
 echo "[###] crontab-executor started with these parameters: $PARAMS"
 
