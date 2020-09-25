@@ -29,7 +29,7 @@ do # filling TMP_CRONTAB
         echo
     ) >> ${TMP_CRONTAB}
 done
-crontab ${TMP_CRONTAB} || exit 4
+awk 'NF' ${TMP_CRONTAB} | crontab - || exit 4
 
 echo
 echo "[###] resulting crontab:"
