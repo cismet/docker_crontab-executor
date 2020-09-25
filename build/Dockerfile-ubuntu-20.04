@@ -1,0 +1,15 @@
+FROM ubuntu:20.04
+
+RUN apt-get update -y \
+    && apt-get dist-upgrade -y \    
+    && apt-get install cron iputils-ping -y \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY ./entrypoint.sh /entrypoint.sh
+RUN echo "cron -f" >> /entrypoint.sh
+
+COPY ./dummycrontab /etc/cron/crontab
+
+RUN ln -sf /proc/1/fd/1 /out
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["*"]

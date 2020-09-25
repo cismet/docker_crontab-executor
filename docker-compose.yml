@@ -1,16 +1,28 @@
 version: "3.8"
 
 services:
-  crontab-executor-alpine:  
+
+  crontab-executor:  
+    image: cismet/crontab-executor:${DOCKERFILE_VERSION}    
+    build: 
+      context: ./build
+      dockerfile: "Dockerfile-${DOCKERFILE_VERSION}"
+
     container_name: crontab-executor
-    image: cismet/crontab-executor:alpine
-    build: ./build-alpine
     environment:
       - TZ=Europe/Berlin
     volumes:
+      # these are example crontab-files
       - ./example-crontabs/echoDate:/etc/cron/001-crontab:ro
       - ./example-crontabs/echo2lines:/etc/cron/002-crontab:ro
       - ./example-crontabs/ping8888:/etc/cron/003-crontab:ro
+
+      # for control over docker containers of the host machine:
+      # (needs the corresponding system base image. f.e. ubuntu if the host is an ubuntu machine)
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /usr/bin/docker:/usr/bin/docker
+
+      # uncomment and adapt the entrypoint arguments if needed:
 #    command: ["*"] #  executing everything that is mapped to /etc/cron/ (this is the default)
 #    command: ["001-crontab"] # executing a single crontab file
 #    command: ["001-crontab", "002-crontab", "003-crontab"] # executing a list of crontab files

@@ -1,9 +1,12 @@
-FROM alpine:latest
+FROM alpine:3.12.0
 
 RUN apk update && apk upgrade && apk add --no-cache tzdata
 
 COPY ./entrypoint.sh /entrypoint.sh
+RUN echo "crond -f" >> /entrypoint.sh
+
 COPY ./dummycrontab /etc/cron/crontab
 
+RUN ln -sf /proc/1/fd/1 /out
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["*"]

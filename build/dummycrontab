@@ -1,0 +1,1 @@
+@reboot echo "$(date) | crontab-executor started successfully" >/out 2>&1

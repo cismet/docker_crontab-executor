@@ -1,1 +1,1 @@
-* * * * * echo "$(ping -c1 8.8.8.8 | head -2 | tail -1)" >> /dev/stdout 2>&1
+* * * * * ping -c1 8.8.8.8 | grep icmp_seq >>/out 2>&1

@@ -29,14 +29,15 @@ do # filling TMP_CRONTAB
         echo
     ) >> ${TMP_CRONTAB}
 done
+crontab ${TMP_CRONTAB} || exit 4
 
 echo
 echo "[###] resulting crontab:"
 echo
-awk 'NF' ${TMP_CRONTAB} || exit 4
-crontab ${TMP_CRONTAB} || exit 5
+crontab -l
 
 echo
-echo "[###] crond starting now"
+echo "[###] cron starting now"
 echo
-crond  -f || exit 6
+
+# DOCKERFILE appends start command to the bottom
